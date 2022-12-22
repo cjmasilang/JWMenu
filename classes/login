@@ -1,0 +1,163 @@
+<?php 
+class login{
+
+ public $username;
+ public $password;
+ public $firstname;
+ public $lastname;
+ public $usertype;
+ public $office;
+ public $status;
+ 
+
+ function __construct($db){
+  $this->conn = $db;
+ }
+
+public function count_side_content(){
+ 
+    // select query
+      $query = "SELECT  COUNT(*) as total_rows       
+            FROM menu ORDER BY food_id DESC
+            LIMIT 4";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+   
+ 
+     $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+    return $row['total_rows'];
+}
+public function count_new_content(){
+ 
+    // select query
+      $query = "SELECT  COUNT(*) as total_rows       
+            FROM menu ORDER BY food_id DESC
+            LIMIT 1";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+   
+ 
+     $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+    return $row['total_rows'];
+}
+
+function view_content(){
+ 
+    // query to read all user records, with limit clause for pagination
+    $query = "SELECT *         
+            FROM menu ORDER BY food_id DESC
+            LIMIT 1
+            ";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+    // execute query
+    $stmt->execute();
+ 
+    // return values
+    return $stmt;
+
+}
+
+
+function view_side_content(){
+ 
+    // query to read all user records, with limit clause for pagination
+    $query = "SELECT *         
+            FROM menu ORDER BY food_id DESC
+            LIMIT 4
+            ";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+    // execute query
+    $stmt->execute();
+ 
+    // return values
+    return $stmt;
+
+}
+
+function increment(){
+ 
+    // query to read all user records, with limit clause for pagination
+    $query = "SELECT increment_number         
+            FROM increment_counter ORDER BY date_add DESC LIMIT 1 
+            ";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+    // execute query
+    $stmt->execute();
+ 
+    // return values
+    return $stmt;
+
+}
+
+ function user_data(){
+ 	$query = "SELECT * FROM user_accounts WHERE username = ?";
+ 	$stmt = $this->conn->prepare($query);
+
+
+ 	$stmt->bindparam(1,$this->username);
+ 	
+ 	$stmt->execute();
+
+ 	return $stmt;
+ }
+
+              function create_account(){
+        $query = "INSERT into  user_accounts
+      SET  firstname=?, lastname=? , username = ? , password = ? ,account_status = 1, usertype = 'admin' ";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindparam(1, $this->firstname);
+        $stmt->bindparam(2, $this->lastname);
+        $stmt->bindparam(3, $this->username);
+        $stmt->bindparam(4, $this->password);
+       
+
+
+          if($result = $stmt->execute()){
+            return true;
+                }
+
+                else{
+         return false;
+            }
+      
+    
+            
+    }
+
+                  function inc(){
+        $query = "INSERT into  increment_counter
+      SET  increment_number=?";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindparam(1, $this->increment_number);
+       
+
+
+          if($result = $stmt->execute()){
+            return true;
+                }
+
+                else{
+         return false;
+            }
+      
+    
+            
+    }
+}
+?>
