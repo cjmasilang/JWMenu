@@ -1,0 +1,43 @@
+        .wrapper{ font: 14px sans-serif; }
+        .wrapper{ width: 100%; padding: 20px; }
+
+
+
+.logo{
+
+      display: block;
+  float: left;
+}
+.btn-circle.btn-xl {
+  width: 150px;
+  height: 60px;
+  padding: 10px 16px;
+  font-size: 17px;
+  line-height: 2;
+  border-radius: 80px;
+}
+.btn-circle.btn-x2 {
+  width: 100px;
+  height: 40px;
+  padding: 10px 16px;
+  font-size: 17px;
+  line-height: 1;
+  border-radius: 80px;
+}
+.btn-x3 {
+  width: 200px;
+  height: 60px;
+  padding: 10px 16px;
+  font-size: 17px;
+  line-height: 2;
+  border-radius: 60px;
+}
+a.ex1:hover, a.ex1:active {color: red;}
+        .login {
+  display: block;
+   height: 470px;
+   width: 420px;
+   
+   background-color: gray;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
